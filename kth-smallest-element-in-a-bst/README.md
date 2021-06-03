@@ -1,3 +1,4 @@
+[Discussion Post (created on 3/5/2021 at 20:50)](https://leetcode.com/problems/kth-smallest-element-in-a-bst/discuss/1249343/O(1)-Space-or-Morris-Traversal-or-Inorder)  
 <h2>230. Kth Smallest Element in a BST</h2><h3>Medium</h3><hr><div><p>Given the <code>root</code> of a binary search tree, and an integer <code>k</code>, return <em>the</em> <code>k<sup>th</sup></code> (<strong>1-indexed</strong>) <em>smallest element in the tree</em>.</p>
 
 <p>&nbsp;</p>
