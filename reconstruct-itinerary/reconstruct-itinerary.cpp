@@ -1,8 +1,8 @@
 class Solution {
 public:
-    static bool cmpr(vector<string> &a,vector<string> &b){
-        return a[1]<b[1];
-    }
+    // static bool cmpr(vector<string> &a,vector<string> &b){
+    //     return a[1]<b[1];
+    // }
     void dfs(unordered_map<string,multiset<string>> &m,vector<string> &ans,string curr="JFK"){
         if(m.count(curr)){
             while(!m[curr].empty()){
@@ -15,7 +15,7 @@ public:
         ans.push_back(curr);
     }
     vector<string> findItinerary(vector<vector<string>>& t) {
-        sort(t.begin(),t.end(),cmpr);
+        // sort(t.begin(),t.end(),cmpr);
         unordered_map<string,multiset<string>> m;
         vector<string> ans;
         for(auto i:t){
