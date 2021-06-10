@@ -1,15 +1,22 @@
 class Solution {
 public:
-    vector<int> help(TreeNode* root){
-        if(!root)
-            return {0,0};
-        vector<int> l=help(root->left),r=help(root->right);
-        int rob=root->val+l[1]+r[1];
-        int notRob=max(l[0]+r[0],max(l[1]+r[1],max(l[1]+r[0],l[0]+r[1])));
-        return {rob,notRob};
-    }
+    unordered_map<TreeNode*,int> t,f;
+    int help(TreeNode* root,bool rob){
+        if(!root){
+            if(rob)t[root]=0;
+            else f[root]=0;
+            return 0;
+        };
+        int a=f.count(root->left)?f[root->left]:help(root->left,0);
+        int b=f.count(root->right)?f[root->right]:help(root->right,0);
+        if(rob)return t[root]=root->val+a+b;
+        int c=t.count(root->left)?t[root->left]:help(root->left,1);
+        int d=t.count(root->right)?t[root->right]:help(root->right,1);
+        return f[root]=max(a+b,max(a+d,max(b+c,c+d)));
+    };
     int rob(TreeNode* root) {
-        vector<int> ans=help(root);
-        return max(ans[0],ans[1]);
+        help(root,1);
+        help(root,0);
+     return max(t[root],f[root]);   
     }
 };
