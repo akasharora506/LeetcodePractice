@@ -1,24 +1,20 @@
 class Solution {
 public:
-    static bool comp(vector<int> &a,vector<int> &b){
-        if(a[1]==b[1])
-            return a[0]>b[0];
-        return a[1]>b[1];
-    }
-    int maximumUnits(vector<vector<int>>& boxTypes, int truckSize) {
-        sort(boxTypes.begin(),boxTypes.end(),comp);
-        int i=0,ans=0;
-        while(truckSize>0&&i<boxTypes.size()){
-            if(boxTypes[i][0]>truckSize){
-                ans+=truckSize*boxTypes[i][1];
-                truckSize=0;
-                i++;
-                break;
+    static bool comp(vector<int>& a,vector<int>& b){
+        return a[1]==b[1]?a[0]>b[0]:a[1]>b[1];
+    };
+    int maximumUnits(vector<vector<int>>& b, long long t) {
+        sort(b.begin(),b.end(),comp);
+        long long ans=0,i=0;
+        while(t>0&&i<b.size()){
+            if(t>=b[i][0]){
+                t-=b[i][0];
+                ans+=b[i][0]*b[i][1];
             }else{
-                ans+=boxTypes[i][0]*boxTypes[i][1];
-                truckSize-=boxTypes[i][0];
-                i++;
+                ans+=t*b[i][1];
+                t=0;
             };
+            i++;
         };
         return ans;
     }
