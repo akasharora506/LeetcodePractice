@@ -1,26 +1,28 @@
 class MedianFinder {
 public:
-    /** initialize your data structure here. */
-    multiset<double> s;
+    int n;
+    priority_queue<int> left;
+    priority_queue<int,vector<int>,greater<int>> right;
     MedianFinder() {
-        
+        n=0;
     }
     
     void addNum(int num) {
-        s.insert(num);
+        if(!right.empty() && num<right.top())left.push(num);
+        else right.push(num);
+        if(left.size()>right.size()+1){
+            right.push(left.top());
+            left.pop();
+        }else if(right.size()>left.size()+1){
+            left.push(right.top());
+            right.pop();
+        };
+        n++;
     }
     
     double findMedian() {
-        int n=s.size();
-        auto i= s.begin();
-        advance(i,(n+1)/2-1);
-        if(n%2){
-            return *i;
-        }else{
-            auto j=i;
-            advance(j,1);
-            return (*i+*j)/(double)2;
-        };
+        if(n%2)return left.size()>right.size()?left.top():right.top();
+        return ((double)left.top()+(double)right.top())/2.0;
     }
 };
 
